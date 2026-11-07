@@ -5,7 +5,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: taskflow
-    ports: ["3306:3306"]
+    ports: ["3308:3308"]
     volumes: [db_data:/var/lib/mysql]
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
@@ -16,11 +16,11 @@ services:
     depends_on:
       db: { condition: service_healthy }
     environment:
-      DB_URL: jdbc:mysql://db:3306/taskflow?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_URL: jdbc:mysql://db:3308/taskflow?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       DB_USERNAME: root
       DB_PASSWORD: root
       JWT_SECRET: change-this-to-a-long-random-secret-at-least-32-chars
-      CORS_ORIGINS: http://localhost:5173
+      CORS_ORIGINS: http://localhost:3000
       ADMIN_USERNAME: admin
       ADMIN_PASSWORD: admin123
     ports: ["8080:8080"]
